@@ -1,0 +1,1375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Baymax Founding Plan</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+/* Layout: a working document. A sticky contents rail on the left, one reading column on the right.
+   Text keeps a 72-character measure; tables and figures may run the full column width. */
+:root {
+  --bg: #F3F5F8;
+  --surface: #FFFFFF;
+  --ink: #0F1B2D;
+  --muted: #52617A;
+  --line: #D8DEE8;
+  --line-strong: #B4BFD0;
+  --accent: #0B6B5C;
+  --accent-soft: #DCEFEA;
+  --risk: #B23A26;
+  --risk-soft: #F9E4DF;
+  --hyp: #8A5A00;
+  --hyp-soft: #FBEFD2;
+  --mark: #8491A7;
+  --mark-soft: #E6EAF0;
+  --font-display: "Space Grotesk", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0D1420;
+    --surface: #141D2C;
+    --ink: #E7ECF3;
+    --muted: #9AA8BD;
+    --line: #263247;
+    --line-strong: #3A4963;
+    --accent: #4FCFB0;
+    --accent-soft: #12332D;
+    --risk: #FF8F7A;
+    --risk-soft: #3A1B16;
+    --hyp: #F0C468;
+    --hyp-soft: #352A10;
+    --mark: #7C8AA3;
+    --mark-soft: #1C2637;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0D1420;
+  --surface: #141D2C;
+  --ink: #E7ECF3;
+  --muted: #9AA8BD;
+  --line: #263247;
+  --line-strong: #3A4963;
+  --accent: #4FCFB0;
+  --accent-soft: #12332D;
+  --risk: #FF8F7A;
+  --risk-soft: #3A1B16;
+  --hyp: #F0C468;
+  --hyp-soft: #352A10;
+  --mark: #7C8AA3;
+  --mark-soft: #1C2637;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 16px/1.62 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.shell {
+  display: grid;
+  grid-template-columns: 236px minmax(0, 1fr);
+  gap: 56px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-block: 44px 96px;
+  padding-left: max(32px, env(safe-area-inset-left, 0px));
+  padding-right: max(32px, env(safe-area-inset-right, 0px));
+}
+
+/* Contents rail */
+.toc { position: sticky; top: 24px; align-self: start; max-height: calc(100vh - 48px); overflow: auto; }
+.toc-title { font: 600 11px/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px 8px; }
+.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; }
+.toc a { display: flex; gap: 10px; padding: 5px 8px; border-radius: 4px; color: var(--muted); text-decoration: none; font-size: 14px; line-height: 1.35; }
+.toc a:hover { color: var(--ink); }
+.toc a.active { color: var(--ink); background: var(--surface); font-weight: 600; }
+.toc .n { font: 500 12px/1.5 var(--font-mono); font-variant-numeric: tabular-nums; min-width: 1.5em; color: var(--mark); }
+
+/* Reading column */
+main { min-width: 0; max-width: 960px; }
+.masthead .eyebrow { font: 600 12px/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 0 0 18px; }
+h1 { font: 700 46px/1.04 var(--font-display); letter-spacing: -.025em; margin: 0 0 18px; text-wrap: balance; }
+.lede { font-size: 19px; line-height: 1.55; color: var(--muted); max-width: 62ch; margin: 0 0 28px; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 0; padding: 14px 0; border-block: 1px solid var(--line); font-size: 14px; }
+.meta div { display: flex; gap: 8px; }
+.meta dt { color: var(--muted); }
+.meta dd { margin: 0; font-weight: 500; }
+
+.guide { margin-top: 24px; display: grid; gap: 10px; font-size: 14.5px; color: var(--muted); max-width: 72ch; }
+.guide p { margin: 0; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; }
+.legend span { display: inline-flex; gap: 6px; align-items: center; }
+
+section { margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--line); scroll-margin-top: 16px; }
+h2 { font: 600 30px/1.15 var(--font-display); letter-spacing: -.015em; margin: 0 0 20px; text-wrap: balance; display: flex; gap: 14px; align-items: baseline; }
+h2 .n { font: 500 14px/1 var(--font-mono); color: var(--mark); font-variant-numeric: tabular-nums; flex: none; }
+h3 { font: 600 19px/1.3 var(--font-display); margin: 36px 0 10px; text-wrap: balance; }
+h4 { font: 600 15px/1.35 var(--font-body); margin: 22px 0 6px; }
+section > p, section > ul, section > ol, section > h3, section > h4, .measure { max-width: 72ch; }
+p { margin: 0 0 14px; }
+ul, ol { margin: 0 0 14px; padding-left: 22px; }
+li { margin-bottom: 6px; }
+li::marker { color: var(--mark); }
+strong { font-weight: 600; }
+
+/* Direction: the recommended call for each section */
+.direction { background: var(--accent-soft); border-radius: 6px; padding: 16px 20px 18px; margin: 0 0 24px; max-width: 72ch; }
+.direction .label { font: 600 11px/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 0 0 8px; }
+.direction p { margin: 0; font-size: 17px; line-height: 1.5; font-weight: 500; }
+
+.bet { font: 500 25px/1.32 var(--font-display); letter-spacing: -.01em; max-width: 30em; margin: 0 0 28px; text-wrap: balance; }
+.bet em { font-style: normal; color: var(--accent); }
+
+.findings { list-style: none; padding: 0; margin: 0 0 24px; display: grid; gap: 14px; max-width: 72ch; counter-reset: f; }
+.findings li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 8px; margin: 0; counter-increment: f; }
+.findings li::before { content: counter(f); font: 600 13px/1.9 var(--font-mono); color: var(--mark); }
+
+/* Small inline markers */
+.src { display: inline-block; font: 500 11px/1.5 var(--font-mono); color: var(--muted); text-decoration: none; border: 1px solid var(--line-strong); border-radius: 3px; padding: 0 5px; margin-left: 2px; white-space: nowrap; vertical-align: 1px; }
+.src:hover { color: var(--accent); border-color: var(--accent); }
+.chip { display: inline-block; font: 600 10.5px/1.6 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; border-radius: 3px; padding: 0 6px; white-space: nowrap; vertical-align: 1px; }
+.chip.read { background: var(--mark-soft); color: var(--muted); }
+.chip.test { background: var(--hyp-soft); color: var(--hyp); }
+.own { display: inline-block; font: 600 10.5px/1.7 var(--font-mono); letter-spacing: .06em; border-radius: 3px; padding: 0 6px; white-space: nowrap; text-align: center; min-width: 44px; }
+.own.eng { background: var(--mark-soft); color: var(--ink); }
+.own.biz { background: var(--accent-soft); color: var(--ink); }
+.own.both { background: var(--hyp-soft); color: var(--ink); }
+
+/* Explore next */
+.explore { margin: 28px 0 0; padding: 18px 0 0; border-top: 1px dashed var(--line-strong); max-width: 72ch; }
+.explore .label { font: 600 11px/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+.explore ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 9px; }
+.explore li { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 10px; align-items: baseline; margin: 0; font-size: 15px; }
+
+/* Notes */
+.note { border: 1px solid var(--line-strong); border-radius: 6px; padding: 14px 18px; margin: 20px 0; max-width: 72ch; font-size: 15px; }
+.note.counter { background: var(--risk-soft); border-color: transparent; }
+.note .label { font: 600 11px/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+.note.counter .label { color: var(--risk); }
+.note p:last-child, .note ul:last-child { margin-bottom: 0; }
+
+/* Tables */
+.scroll { position: relative; overflow-x: auto; margin: 18px 0 22px; }
+table { width: 100%; border-collapse: collapse; font-size: 14.5px; line-height: 1.5; }
+th { text-align: left; font: 600 11px/1.4 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line-strong); vertical-align: bottom; }
+td { padding: 11px 14px 11px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+td:first-child { font-weight: 600; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.w620 { min-width: 600px; }
+.w680 { min-width: 560px; }
+.w820 { min-width: 660px; }
+.sub { display: block; font-weight: 400; color: var(--muted); font-size: 13.5px; }
+tr.us td { background: var(--accent-soft); }
+tr.us td:first-child { padding-left: 10px; }
+
+/* Figures */
+figure { margin: 26px 0; padding: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+figure .ftitle { font: 600 16px/1.3 var(--font-display); margin: 0 0 4px; }
+figure .fsub { font-size: 13.5px; color: var(--muted); margin: 0 0 18px; max-width: 80ch; }
+figcaption { font-size: 13px; color: var(--muted); margin-top: 16px; max-width: 86ch; }
+figure .scroll { margin: 0; }
+
+/* Coverage matrix */
+.matrix th, .matrix td { text-align: center; padding: 9px 8px; }
+.matrix th:first-child, .matrix td:first-child { text-align: left; padding-left: 0; }
+.matrix tr.us td:first-child { padding-left: 10px; }
+.dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--line-strong); vertical-align: middle; }
+.dot.full { background: var(--ink); border-color: var(--ink); }
+.dot.part { border-color: var(--ink); background: linear-gradient(90deg, var(--ink) 50%, transparent 50%); }
+tr.us .dot.full { background: var(--accent); border-color: var(--accent); }
+tr.us .dot.part { border-color: var(--accent); background: linear-gradient(90deg, var(--accent) 50%, transparent 50%); }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.key { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--muted); margin-top: 14px; }
+.key span { display: inline-flex; gap: 6px; align-items: center; }
+
+/* Price ladder: a range plot on a log axis */
+.ladder { display: grid; gap: 8px; }
+.lrow { display: grid; grid-template-columns: 196px minmax(0, 1fr) 138px; gap: 14px; align-items: center; font-size: 14px; }
+.lname { line-height: 1.3; }
+.lrow.us .lname { font-weight: 600; }
+.lval { font: 500 12.5px/1.3 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--muted); text-align: right; white-space: nowrap; }
+.lrow.us .lval { color: var(--ink); }
+.ltrack { position: relative; height: 24px; background-image: linear-gradient(to right, var(--line) 1px, transparent 1px); background-size: 25% 100%; border-right: 1px solid var(--line); }
+.lbar { position: absolute; top: 6px; height: 12px; border-radius: 6px; background: var(--mark); }
+.ldot { position: absolute; top: 5px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: var(--mark); box-shadow: 0 0 0 2px var(--surface); }
+.lrow.us .lbar { background: var(--accent); }
+.laxis { position: relative; height: 18px; font: 500 11.5px/1 var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.laxis span { position: absolute; top: 4px; transform: translateX(-50%); }
+.laxis span:first-child { transform: none; }
+.laxis span:last-child { transform: translateX(-100%); }
+
+/* Two-column lists */
+.split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 40px; margin: 18px 0; max-width: 860px; }
+.split h4 { margin-top: 0; }
+.split ul { margin-bottom: 0; }
+
+/* Product outputs */
+.outputs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 18px 0 22px; border-block: 1px solid var(--line-strong); }
+.outputs div { padding: 16px 20px 16px 0; min-width: 0; }
+.outputs div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+.outputs h4 { margin: 0 0 6px; font: 600 17px/1.3 var(--font-display); }
+.outputs p { margin: 0; font-size: 14.5px; color: var(--muted); }
+
+/* Staircase */
+.stairs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 8px 0 0; }
+.stair { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 14px 14px 16px; min-width: 0; font-size: 13.5px; line-height: 1.45; }
+.stair:nth-child(1) { margin-top: 84px; }
+.stair:nth-child(2) { margin-top: 56px; }
+.stair:nth-child(3) { margin-top: 28px; }
+.stair:nth-child(1) { border-color: var(--accent); background: var(--accent-soft); }
+.stair .when { font: 600 11px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.stair h4 { font: 600 18px/1.2 var(--font-display); margin: 8px 0 8px; }
+.stair p { margin: 0 0 8px; }
+.stair p:last-child { margin: 0; }
+.stair .k { color: var(--muted); }
+
+/* Architecture stack */
+.stack { display: grid; gap: 6px; }
+.layer { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); font-size: 14px; align-items: baseline; }
+.layer b { font: 600 14px/1.3 var(--font-display); }
+.layer span { color: var(--muted); }
+.layer code { font: 500 12.5px/1.5 var(--font-mono); color: var(--ink); }
+.layer.core { border-color: var(--accent); background: var(--accent-soft); }
+
+/* Positioning statement */
+.statement { font: 500 19px/1.5 var(--font-display); border-block: 1px solid var(--line-strong); padding: 20px 0; margin: 18px 0 24px; max-width: 40em; }
+
+/* Headline numbers */
+.figs { display: flex; flex-wrap: wrap; gap: 14px 44px; margin: 14px 0 20px; }
+.figs div { min-width: 120px; }
+.figs b { display: block; font: 600 32px/1.1 var(--font-display); letter-spacing: -.01em; }
+.figs span { font-size: 13.5px; color: var(--muted); }
+
+/* 90-day chart */
+.gantt { min-width: 590px; display: grid; gap: 6px; }
+.grow { display: grid; grid-template-columns: 84px repeat(13, minmax(0, 1fr)); align-items: stretch; }
+.grow .glabel { grid-column: 1; grid-row: 1; font: 600 13px/1.3 var(--font-body); padding: 7px 8px 7px 0; align-self: center; }
+.grow .glines { grid-column: 2 / -1; grid-row: 1; background-image: linear-gradient(to right, var(--line) 1px, transparent 1px); background-size: calc(100% / 13) 100%; border-right: 1px solid var(--line); }
+.gbar { grid-row: 1; z-index: 1; margin: 4px 3px; padding: 5px 8px; border-radius: 4px; background: var(--mark-soft); font-size: 12.5px; line-height: 1.3; min-width: 0; }
+.gbar.hot { background: var(--accent-soft); }
+.ghead { font: 500 11px/1 var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.ghead div { grid-row: 1; padding: 0 0 6px 4px; }
+.ghead .gdate { grid-row: 2; padding: 0 0 8px 4px; white-space: nowrap; }
+.gate { grid-row: 1; z-index: 1; justify-self: end; align-self: center; margin-right: 3px; font: 600 11px/1 var(--font-mono); background: var(--ink); color: var(--bg); padding: 6px 7px; border-radius: 3px; white-space: nowrap; }
+
+.gates { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 18px 0; }
+.gatebox { border: 1px solid var(--line-strong); border-radius: 6px; padding: 16px 18px; min-width: 0; font-size: 15px; }
+.gatebox .when { font: 600 11px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.gatebox h4 { font: 600 18px/1.25 var(--font-display); margin: 8px 0 10px; }
+.gatebox ul { margin-bottom: 10px; }
+.gatebox p { margin: 0; color: var(--muted); font-size: 14px; }
+
+/* Checklist */
+.checks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 28px; margin: 14px 0 6px; }
+.checks h4 { margin: 0 0 10px; display: flex; gap: 8px; align-items: center; }
+.checks label { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 10px; align-items: start; font-size: 14.5px; line-height: 1.45; margin-bottom: 9px; cursor: pointer; }
+.checks input { width: 16px; height: 16px; margin: 3px 0 0; accent-color: var(--accent); }
+.checks input:checked + span { color: var(--muted); text-decoration: line-through; }
+
+/* Workstreams */
+.streams td:first-child { white-space: nowrap; }
+
+/* Decisions */
+.decisions { list-style: none; padding: 0; margin: 0; counter-reset: d; max-width: 72ch; }
+.decisions li { counter-increment: d; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 8px; padding: 12px 0; border-bottom: 1px solid var(--line); margin: 0; }
+.decisions li::before { content: "Q" counter(d); font: 600 12px/2 var(--font-mono); color: var(--mark); }
+.decisions .why { display: block; color: var(--muted); font-size: 14px; margin-top: 2px; }
+
+/* Sources */
+.sources { columns: 2; column-gap: 40px; font-size: 14px; max-width: none; }
+.sources h4 { margin: 0 0 6px; break-after: avoid; }
+.sources ul { list-style: none; padding: 0; margin: 0 0 18px; break-inside: avoid; }
+.sources li { margin-bottom: 4px; }
+
+footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13.5px; max-width: 72ch; }
+
+@media (max-width: 960px) {
+  .shell { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-block: 24px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .toc { position: static; max-height: none; border: 1px solid var(--line); border-radius: 6px; padding: 14px 10px; background: var(--surface); }
+  .toc ol { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 8px; }
+  h1 { font-size: 36px; }
+  h2 { font-size: 25px; }
+  .bet { font-size: 21px; }
+  section { margin-top: 44px; padding-top: 30px; }
+}
+@media (max-width: 700px) {
+  .split, .outputs, .stairs, .gates, .checks { grid-template-columns: minmax(0, 1fr); }
+  .outputs div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+  .stair:nth-child(n) { margin-top: 0; }
+  .lrow { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; }
+  .lrow .ltrack, .lrow .laxis { grid-column: 1 / -1; grid-row: 2; }
+  .lrow.axis { display: block; }
+  .layer { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .sources { columns: 1; }
+  figure { padding: 16px; }
+  .toc ol { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<nav class="toc" aria-label="Contents">
+  <p class="toc-title">Contents</p>
+  <ol>
+    <li><a href="#summary"><span class="n">01</span>The short version</a></li>
+    <li><a href="#field"><span class="n">02</span>The field in ten minutes</a></li>
+    <li><a href="#market"><span class="n">03</span>Market and timing</a></li>
+    <li><a href="#competition"><span class="n">04</span>Competition</a></li>
+    <li><a href="#customer"><span class="n">05</span>Customer</a></li>
+    <li><a href="#product"><span class="n">06</span>Product and MVP</a></li>
+    <li><a href="#tech"><span class="n">07</span>Technical architecture</a></li>
+    <li><a href="#gtm"><span class="n">08</span>Go-to-market</a></li>
+    <li><a href="#pricing"><span class="n">09</span>Pricing</a></li>
+    <li><a href="#company"><span class="n">10</span>Company setup and legal</a></li>
+    <li><a href="#funding"><span class="n">11</span>Fundraising</a></li>
+    <li><a href="#plan"><span class="n">12</span>First 90 days</a></li>
+    <li><a href="#risks"><span class="n">13</span>Risks</a></li>
+    
+    <li><a href="#streams"><span class="n">14</span>Directions to explore</a></li>
+    <li><a href="#sources"><span class="n">15</span>Sources and limits</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<header class="masthead">
+  <p class="eyebrow">Founding plan · v0.1 · 16 November 2026</p>
+  <h1>Baymax founding plan</h1>
+  <p class="lede">A direction for the company, built on a research sweep of technology cost management. Each section gives a recommended direction, the evidence behind it, and what to dig into next.</p>
+  <dl class="meta">
+    <div><dt>For</dt><dd>The two founders</dd></div>
+    <div><dt>Status</dt><dd>Draft for discussion</dd></div>
+    <div><dt>Research base</dt><dd>Seven research note files</dd></div>
+  </dl>
+  <div class="guide">
+    <div class="legend">
+      <span><a class="src" href="#sources">Source</a> links to the evidence</span>
+      <span><span class="chip read">Our read</span> inference from the evidence</span>
+      <span><span class="chip test">To test</span> hypothesis for customer discovery</span>
+      <span><span class="own eng">ENG</span> engineering founder</span>
+      <span><span class="own biz">BIZ</span> business founder</span>
+      <span><span class="own both">BOTH</span> shared</span>
+    </div>
+    
+  </div>
+</header>
+
+<section id="summary">
+  <h2><span class="n">01</span>The short version</h2>
+  <p class="bet">Baymax is <em>the technology finance analyst a small company never hires</em>. An agent connects to the bills, builds and maintains the cost model, closes the month, and explains the numbers in plain language.</p>
+
+  <ol class="findings">
+    <li><div><strong>Apptio stops at about $80K a year.</strong> Its cheapest listed package is $80,040 a year for up to $25M of IT spend, sold by demo, with services reported at 30 to 50% of first-year cost. There is no self-serve tier. <a class="src" href="https://aws.amazon.com/marketplace/pp/prodview-mdyxbluvzbcn4" target="_blank" rel="noopener">AWS Marketplace</a></div></li>
+    <li><div><strong>Small companies do not ask for TBM.</strong> They ask why the bill moved, what their gross margin is, and what to forecast. We found no demand for towers, run-versus-grow or chargeback below the mid-market. <span class="chip read">Our read</span></div></li>
+    <li><div><strong>Seeing spend is already free.</strong> Vantage is free up to $2,500 a month of tracked spend, Ramp gives away AI token tracking, and AWS shipped a free FinOps agent in June 2026. A dashboard or a chat box over cost data is no longer a product. <a class="src" href="https://vantage.sh/pricing" target="_blank" rel="noopener">Vantage</a> <a class="src" href="https://ramp.com/ai-cost-monitoring" target="_blank" rel="noopener">Ramp</a> <a class="src" href="https://siliconangle.com/2026/06/11/aws-launches-finops-agent-bring-ai-cost-governance-cloud-spend-finopsx/" target="_blank" rel="noopener">SiliconANGLE</a></div></li>
+    <li><div><strong>The open ground is the join.</strong> No product we found combines cloud, AI, SaaS and people cost in one model and allocates it to product and customer for a small company. Each incumbent owns one cost pool.</div></li>
+    <li><div><strong>Start where cost threatens survival.</strong> AI products run at 45 to 53% gross margin against 80% or more for classic SaaS. AI-native companies spending $10K or more a month on cloud and AI have a margin problem today. <a class="src" href="https://www.iconiq.com/growth/insights/state-of-ai-2026" target="_blank" rel="noopener">ICONIQ</a></div></li>
+    <li><div><strong>Sell the work first.</strong> The business founder delivers the first reports by hand, using the agent as a tool, and engineering automates the repeated steps. Vendr reached $1M of annual revenue with 19 customers by selling an outcome. <a class="src" href="https://techcrunch.com/2019/10/23/vendr/" target="_blank" rel="noopener">TechCrunch</a></div></li>
+    
+  </ol>
+
+  <div class="direction">
+    <p class="label">Direction</p>
+    <p>Run a five-week interview sprint, pick the wedge on 18 December 2026, then spend eight weeks proving that design partners will pay. On 12 February 2027 we either have paying customers or we change track.</p>
+  </div>
+</section>
+
+<section id="field">
+  <h2><span class="n">02</span>The field in ten minutes</h2>
+  <div class="direction">
+    <p class="label">Direction</p>
+    <p>Speak finance to customers and FinOps to data. Keep TBM as the method inside the product and as the bridge upmarket later.</p>
+  </div>
+
+  <p>TBM is a method for turning the general ledger's view of technology spend into views that IT and the business can act on. It is stewarded by the TBM Council, which began as Apptio's customer advisory board. The current standard is Taxonomy 5.0 (June 2025), which added cloud, SaaS and AI structures. <a class="src" href="https://www.tbmcouncil.org/taxonomy" target="_blank" rel="noopener">TBM Council</a></p>
+  <p>For an engineer, a TBM model is an allocation graph over financial data. Money enters as ledger lines, is classified into cost pools, moves through shared technology towers using drivers, lands on products and services, and is assigned to whoever consumes them. Showback, unit cost, budget versus actual and benchmarks are all reads of that one graph.</p>
+
+  <figure>
+    <p class="ftitle">The four TBM layers, at two company sizes</p>
+    <p class="fsub">The method carries over. The inputs get simpler and the last layer changes from business units to customers.</p>
+    <div class="scroll">
+      <table class="w820">
+        <thead><tr><th>Layer</th><th>In an enterprise</th><th>In a 100-person software company</th><th>Question answered</th></tr></thead>
+        <tbody>
+          <tr><td>1. Cost pools</td><td>Labor, hardware, software, cloud services, outside services and facilities, read from the ledger</td><td>Cloud bill, AI provider bills, SaaS subscriptions, payroll and contractors</td><td>What did we spend?</td></tr>
+          <tr><td>2. Towers</td><td>Compute, storage, network, end user, application, security, IT management</td><td>Shared platform, inference, data and observability, developer tools</td><td>What kind of technology did it buy?</td></tr>
+          <tr><td>3. Solutions</td><td>Applications, products and services</td><td>Products, features, environments, workflows</td><td>What does each thing we run cost?</td></tr>
+          <tr><td>4. Consumers</td><td>Business units and cost centers, through showback or chargeback</td><td>Customers, plans and teams</td><td>Who caused the cost, and is it worth it?</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </figure>
+
+  <h3>Where the labor goes</h3>
+  <p>Apptio practitioners describe loading 25 to 90 files a month, a close that runs from business day 2 to day 8, and a reconciliation meeting with Finance. IBM and its partners sell data management, model configuration, validation and report building as services. That list is the agent's job description. <a class="src" href="https://community.ibm.com/community/user/discussion/monthly-close-in-apptio" target="_blank" rel="noopener">IBM community</a> <a class="src" href="https://www.apptio.com/resources/professional-services/" target="_blank" rel="noopener">Apptio services</a></p>
+
+  <h3>Three disciplines are merging</h3>
+  <ul>
+    <li><strong>FinOps</strong> started with cloud bills and now claims all technology spend. In the State of FinOps 2026 survey, 98% of teams manage AI spend (31% in 2024), 90% manage SaaS and 28% manage labor. <a class="src" href="https://data.finops.org/" target="_blank" rel="noopener">FinOps Foundation</a></li>
+    <li><strong>TBM</strong> started at the ledger and added cloud, SaaS and AI in version 5.0.</li>
+    <li><strong>SaaS management</strong> is being absorbed into larger platforms (<a href="#competition">section 4</a>).</li>
+  </ul>
+
+  <h3>FOCUS is the data standard to build on</h3>
+  <p>FOCUS is an open billing-data schema from the FinOps Foundation. Version 1.4 (June 2026) covers cost and usage, commitments, invoices and billing periods. Version 1.5, which adds AI token billing, is due in December 2026. AWS, Microsoft, Google and Oracle export it. OpenAI, Anthropic and mainstream SaaS vendors do not, so for small companies the real sources remain card feeds, ledgers and provider usage APIs. <a class="src" href="https://focus.finops.org/focus-specification/" target="_blank" rel="noopener">FOCUS</a></p>
+
+  <div class="explore">
+    <p class="label">Explore next</p>
+    <ul>
+      <li><span class="own biz">BIZ</span><span>Write our own plain-language cost model on one page: pools, shared services, products, customers. It becomes the product's backbone and removes our dependence on the TBM taxonomy.</span></li>
+      <li><span class="own both">BOTH</span><span>The business founder walks through one real month-end close, step by step, so the agent's tasks come from the actual work.</span></li>
+      <li><span class="own eng">ENG</span><span>Read the FOCUS column list and its use-case SQL library. They seed our schema and test questions.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="market">
+  <h2><span class="n">03</span>Market and timing</h2>
+  <div class="direction">
+    <p class="label">Direction</p>
+    <p>The market is real, but published sizes are noisy. Lead the pitch with low penetration and timing, and target customers by spend level instead of headcount.</p>
+  </div>
+
+  <div class="scroll">
+    <table class="w680">
+      <thead><tr><th>Measure</th><th>Figure</th><th>Source and caveat</th></tr></thead>
+      <tbody>
+        <tr><td>Cloud cost tools</td><td class="num">About $1B in 2024, above $1.75B by 2028</td><td>Gartner, relayed by a vendor <a class="src" href="https://www.doit.com/blog/what-is-the-gartner-magic-quadrant-for-cloud-financial-management-tools" target="_blank" rel="noopener">DoiT</a></td></tr>
+        <tr><td>IT finance tool penetration</td><td class="num">15 to 18%</td><td>Gartner 2025. Fewer than half of IT finance teams use any third-party tool. <a class="src" href="https://www.usu.com/en/news/usu-recognized-in-the-2025-gartnerr-market-guide-for-it-financial-management-tools" target="_blank" rel="noopener">USU</a> <a class="src" href="https://www.forrester.com/blogs/tbm-conference-2025-why-it-finance-leaders-must-act-now/" target="_blank" rel="noopener">Forrester</a></td></tr>
+        <tr><td>Cloud spend wasted</td><td class="num">29%</td><td>Self-estimated; first rise in five years <a class="src" href="https://www.flexera.com/about-us/press-center/flexera-finds-cloud-value-is-rising-while-ai-waste-grows" target="_blank" rel="noopener">Flexera 2026</a></td></tr>
+        <tr><td>Hosting cost, private B2B SaaS</td><td class="num">5% of annual revenue</td><td>Median of 1,000+ companies <a class="src" href="https://www.saas-capital.com/blog-posts/spending-benchmarks-for-private-b2b-saas-companies" target="_blank" rel="noopener">SaaS Capital</a></td></tr>
+        <tr><td>Internal AI spend, companies building AI products</td><td class="num">11% of revenue in 2025, 16% projected for 2026</td><td>About 300 software executives <a class="src" href="https://www.iconiq.com/growth/insights/state-of-ai-2026" target="_blank" rel="noopener">ICONIQ</a></td></tr>
+        <tr><td>AI spend per employee per month</td><td class="num">Median $16, top 10% $800, top 1% $10,200</td><td>Card data, October 2026 <a class="src" href="https://ramp.com/data/ai-index" target="_blank" rel="noopener">Ramp AI Index</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Syndicated reports that put "Cloud FinOps" above $14B include services and the cloud providers' own tools. Do not quote them as a software market.</p>
+
+  <h3>Why now</h3>
+  <ol>
+    <li><strong>AI gave software companies a variable cost of goods again.</strong> That recreates, at 30 to 300 people, the cost accounting need TBM served in large IT departments. It now points at product margin.</li>
+    <li><strong>Billing data is standardizing.</strong> FOCUS, provider usage APIs and MCP servers shrink the connector moat incumbents built.</li>
+    <li><strong>Analysts are moving the bar.</strong> Forrester's June 2026 evaluation says a tool that only explains where the money went is already obsolete, and it rewards natural-language interaction and ease of adoption. <a class="src" href="https://www.forrester.com/blogs/announcing-the-forrester-wave-it-financial-management-software-q2-2026-turn-insight-into-decisive-action/" target="_blank" rel="noopener">Forrester</a></li>
+    <li><strong>The incumbent's AI stops at assistants.</strong> IBM's November 2026 release added an AI assistant, report summaries, a data-preparation assistant and MCP servers. Nothing in it builds or runs the model. <a class="src" href="https://www.apptio.com/?p=183973" target="_blank" rel="noopener">Apptio</a></li>
+    <li><strong>The neighboring category is collapsing.</strong> Six of 15 SaaS-management platforms were acquired and one shut down between January 2025 and October 2026.</li>
+  </ol>
+
+  <div class="note counter">
+    <p class="label">Counter-evidence</p>
+    <ul>
+      <li>Under 1% of companies with fewer than 100 employees spend over $100K a year on AI, and 87% of AI spenders call their spend sustainable. <a class="src" href="https://mercury.com/blog/startup-economics-report-2026" target="_blank" rel="noopener">Mercury</a></li>
+      <li>About half of new US businesses are gone within five years. <a class="src" href="https://www.bls.gov/bdm/us_age_naics_00_table7.txt" target="_blank" rel="noopener">BLS</a></li>
+      <li>Self-serve visibility sells for about 1% of tracked spend.</li>
+    </ul>
+    <p>Most small companies have nothing worth managing. The ones that do are a minority, and we have to find them by spend.</p>
+  </div>
+
+  <div class="explore">
+    <p class="label">Explore next</p>
+    <ul>
+      <li><span class="own biz">BIZ</span><span>Count target accounts bottom-up: US AI-native software companies with $10K or more a month of cloud and AI spend. Use funding databases, accelerator directories and the Ramp and Mercury reports.</span></li>
+      <li><span class="own both">BOTH</span><span>Ask every interviewee for monthly cloud, AI and SaaS totals. That builds our own spend distribution, which nobody publishes for small companies.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="competition">
+  <h2><span class="n">04</span>Competition</h2>
+  <div class="direction">
+    <p class="label">Direction</p>
+    <p>Treat card platforms and ledgers as data sources, cloud dashboards as substitutes we leave alone, and Apptio as the long-term target. Our lane is the cost model across all pools, with allocation, delivered as finished analysis.</p>
+  </div>
+
+  <figure>
+    <p class="ftitle">Who covers what</p>
+    <p class="fsub">Each group owns one or two cost pools. Nobody joins them for a small company and carries the cost through to the customer.</p>
+    <div class="scroll">
+      <table class="matrix w620">
+        <thead><tr><th>Player</th><th>Cloud bills</th><th>AI usage</th><th>SaaS and vendors</th><th>People cost</th><th>Cost by customer</th><th>Budget and forecast</th><th>Priced for small companies</th></tr></thead>
+        <tbody>
+          <tr><td>IBM Apptio</td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot part"></span><span class="vh">Partial</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot"></span><span class="vh">No</span></td></tr>
+          <tr><td>Vantage</td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot part"></span><span class="vh">Partial</span></td><td><span class="dot"></span><span class="vh">No</span></td><td><span class="dot part"></span><span class="vh">Partial</span></td><td><span class="dot part"></span><span class="vh">Partial</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td></tr>
+          <tr><td>CloudZero, Finout</td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot part"></span><span class="vh">Partial</span></td><td><span class="dot"></span><span class="vh">No</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot part"></span><span class="vh">Partial</span></td><td><span class="dot"></span><span class="vh">No</span></td></tr>
+          <tr><td>AWS FinOps Agent</td><td><span class="dot part"></span><span class="vh">Partial</span></td><td><span class="dot part"></span><span class="vh">Partial</span></td><td><span class="dot"></span><span class="vh">No</span></td><td><span class="dot"></span><span class="vh">No</span></td><td><span class="dot"></span><span class="vh">No</span></td><td><span class="dot part"></span><span class="vh">Partial</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td></tr>
+          <tr><td>Ramp</td><td><span class="dot"></span><span class="vh">No</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot"></span><span class="vh">No</span></td><td><span class="dot"></span><span class="vh">No</span></td><td><span class="dot part"></span><span class="vh">Partial</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td></tr>
+          <tr><td>Rippling</td><td><span class="dot"></span><span class="vh">No</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot part"></span><span class="vh">Partial</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot"></span><span class="vh">No</span></td><td><span class="dot part"></span><span class="vh">Partial</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td></tr>
+          <tr><td>SaaS management <span class="sub">Zylo, Vertice, Cledara</span></td><td><span class="dot part"></span><span class="vh">Partial</span></td><td><span class="dot part"></span><span class="vh">Partial</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot"></span><span class="vh">No</span></td><td><span class="dot"></span><span class="vh">No</span></td><td><span class="dot part"></span><span class="vh">Partial</span></td><td><span class="dot part"></span><span class="vh">Partial</span></td></tr>
+          <tr><td>AI cost tools <span class="sub">Langfuse, LiteLLM</span></td><td><span class="dot"></span><span class="vh">No</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot"></span><span class="vh">No</span></td><td><span class="dot"></span><span class="vh">No</span></td><td><span class="dot part"></span><span class="vh">Partial</span></td><td><span class="dot"></span><span class="vh">No</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td></tr>
+          <tr class="us"><td>Baymax, 12-month target</td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot part"></span><span class="vh">Partial</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td><td><span class="dot full"></span><span class="vh">Yes</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="key">
+      <span><span class="dot full"></span>Yes</span>
+      <span><span class="dot part"></span>Partial, limited or enterprise-only</span>
+      <span><span class="dot"></span>No</span>
+    </div>
+    <figcaption>Our reading of public product pages in November 2026, to be verified in hands-on teardowns. The MVP covers cloud, AI and cost by customer; the other Baymax cells are the first-year target.</figcaption>
+  </figure>
+
+  <h3>Who matters and how to treat them</h3>
+  <div class="scroll">
+    <table class="w820">
+      <thead><tr><th>Group</th><th>Does well</th><th>Stops at</th><th>Our stance</th></tr></thead>
+      <tbody>
+        <tr><td>Enterprise TBM <span class="sub">IBM Apptio, Brightfin, Nicus, MagicOrange, Serviceware</span></td><td>Trusted allocation of IT cost, planning, benchmarking</td><td>An $80K floor, months to implement, dedicated analysts. All quote-only.</td><td>Long-term target. No overlap on day one.</td></tr>
+        <tr><td>TBM newcomers <span class="sub">Yarken, Mavvrik, EZTBM</span></td><td>Yarken claims agents that automate allocations and find variance causes, and shows mid-size customers <a class="src" href="https://www.yarken.com/" target="_blank" rel="noopener">Yarken</a></td><td>Sales-led, no public pricing</td><td>Closest to our thesis. Do a hands-on teardown.</td></tr>
+        <tr><td>Self-serve cloud cost <span class="sub">Vantage, Cloudchipr</span></td><td>Fast setup, low price, many usage-billed vendors</td><td>An engineer's dashboard. No seat-based SaaS, people cost or margin.</td><td>Do not compete on cloud visibility.</td></tr>
+        <tr><td>Sales-led cloud cost <span class="sub">CloudZero, Finout, Cloudability</span></td><td>Allocation and cost per customer</td><td>Quote-only. CloudZero's median contract is about $78K by a competitor's account.</td><td>Proof that cost per customer has value. We bring it to startup size.</td></tr>
+        <tr><td>Savings-funded <span class="sub">Pump, Archera, ProsperOps, nOps</span></td><td>Free to the customer, paid by providers or from savings <a class="src" href="https://www.pump.co/" target="_blank" rel="noopener">Pump</a></td><td>Commitments and rates only</td><td>Refer or partner. Copying needs a balance sheet.</td></tr>
+        <tr><td>Cloud providers' agents <span class="sub">AWS FinOps Agent, Gemini Cloud Assist</span></td><td>Free answers and anomaly causes <a class="src" href="https://cloud.google.com/blog/products/application-development/gemini-cloud-assist-at-next26" target="_blank" rel="noopener">Google</a></td><td>One cloud, no SaaS, no margin</td><td>Assume single-cloud Q&amp;A is free forever.</td></tr>
+        <tr><td>Card and HR platforms <span class="sub">Ramp, Rippling, Brex, Mercury</span></td><td>Vendor tracking, contracts, AI token spend by team or employee, and huge distribution <a class="src" href="https://siliconangle.com/2026/07/16/ramp-targets-ais-fastest-growing-cost-expanded-token-spend-tracking/" target="_blank" rel="noopener">Ramp</a> <a class="src" href="https://itbrief.com.au/story/rippling-launches-ai-spend-console-to-track-ai-costs" target="_blank" rel="noopener">Rippling</a></td><td>They see the invoice line, not cloud usage. No allocation to customers.</td><td>First data sources, and the most dangerous future competitor. Ramp above all.</td></tr>
+        <tr><td>SaaS management <span class="sub">Zylo, Vertice with Vendr, Tropic, Cledara, Torii</span></td><td>Discovery, renewals, negotiation</td><td>The unit is the app or the contract. Mostly enterprise, and consolidating. <a class="src" href="https://vertice.one/blog/vertice-acquires-vendr" target="_blank" rel="noopener">Vertice</a> <a class="src" href="https://www.toriihq.com/blog/torii-freshworks-acquisition" target="_blank" rel="noopener">Torii</a></td><td>Inputs. Hand negotiation off to them.</td></tr>
+        <tr><td>AI cost tools <span class="sub">Langfuse, LiteLLM, Helicone, Ascerta, Revenium</span></td><td>Cost by model, key and request</td><td>Built for engineers. No revenue join or ledger tie-out. Two were acquired in early 2026. <a class="src" href="https://www.mintlify.com/blog/mintlify-acquires-helicone" target="_blank" rel="noopener">Helicone</a></td><td>Ingest from them. Our output is the margin view on top.</td></tr>
+        <tr><td>New agent startups <span class="sub">StitcherAI, JetScale, FinOpsly, NudgeBee, Frugal, Numos</span></td><td>Each raised $3M to $5.4M in 2025 to 2026 <a class="src" href="https://www.geekwire.com/2026/stitcherai-emerges-from-stealth-with-3m-and-a-different-take-on-the-ai-spending-problem/" target="_blank" rel="noopener">GeekWire</a></td><td>Mostly cloud operations and enterprise pilots</td><td>"AI agent for cloud cost" is a crowded pitch. Numos pitches finance teams and needs a close look.</td></tr>
+        <tr><td>Do it yourself</td><td>A coding agent plus official MCP servers. One firm reports a 59% cut to its AWS bill this way. <a class="src" href="https://standardco.de/ai-sessions/we-pointed-claude-at-our-aws-bill-and-cut-it-59" target="_blank" rel="noopener">Standard Code</a></td><td>A one-off. No memory, no monthly close, no model across vendors.</td><td>Our product must hold state that a single session cannot.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure>
+    <p class="ftitle">Annual price of cost tools, log scale</p>
+    <p class="fsub">Self-serve tools cluster below about $10K a year and enterprise tools start at $30K. A product that does an analyst's work has to earn a price between the two.</p>
+    <div class="ladder" role="img" aria-label="Range plot of annual prices. Vantage 360 to 2,400 dollars. Langfuse 348 to 2,388. Cloudchipr 588 to 10,680. Baymax band to test 3,600 to 30,000. Cloudability entry 30,000. CloudZero median about 78,000. Apptio 80,040 to 198,000.">
+      <div class="lrow"><div class="lname">Vantage, paid self-serve tiers</div><div class="ltrack"><span class="lbar" style="left:13.9%;width:20.6%" title="Vantage Pro to Business: $360 to $2,400 a year"></span></div><div class="lval">$360 to $2,400</div></div>
+      <div class="lrow"><div class="lname">Langfuse cloud, Core to Pro</div><div class="ltrack"><span class="lbar" style="left:13.5%;width:21%" title="Langfuse Core to Pro: $348 to $2,388 a year"></span></div><div class="lval">$348 to $2,388</div></div>
+      <div class="lrow"><div class="lname">Cloudchipr, Basic to Pro</div><div class="ltrack"><span class="lbar" style="left:19.2%;width:31.5%" title="Cloudchipr Basic to Pro: $588 to $10,680 a year"></span></div><div class="lval">$588 to $10,680</div></div>
+      <div class="lrow us"><div class="lname">Baymax, band to test</div><div class="ltrack"><span class="lbar" style="left:38.9%;width:23%" title="Baymax band to test: $3,600 to $30,000 a year"></span></div><div class="lval">$3,600 to $30,000</div></div>
+      <div class="lrow"><div class="lname">Cloudability, entry tier</div><div class="ltrack"><span class="ldot" style="left:61.9%" title="Cloudability entry tier: $30,000 a year"></span></div><div class="lval">$30,000</div></div>
+      <div class="lrow"><div class="lname">CloudZero, median contract</div><div class="ltrack"><span class="ldot" style="left:72.3%" title="CloudZero median contract: about $78,000 a year"></span></div><div class="lval">about $78,000</div></div>
+      <div class="lrow"><div class="lname">Apptio, Essentials to Standard</div><div class="ltrack"><span class="lbar" style="left:72.6%;width:9.8%" title="Apptio Costing Essentials to Standard bundle: $80,040 to $198,000 a year"></span></div><div class="lval">$80,040 to $198,000</div></div>
+      <div class="lrow axis"><div></div><div class="laxis"><span style="left:0">$100</span><span style="left:25%">$1K</span><span style="left:50%">$10K</span><span style="left:75%">$100K</span><span style="left:100%">$1M</span></div><div></div></div>
+    </div>
+    <figcaption>Published list prices observed in November 2026, annualized. CloudZero's figure is buyer data relayed by a competitor. Free tiers (Vantage Starter, Ramp AI spend, the AWS and Google agents, Pump) sit off the left edge at $0. <a class="src" href="https://vantage.sh/pricing" target="_blank" rel="noopener">Vantage</a> <a class="src" href="https://langfuse.com/pricing" target="_blank" rel="noopener">Langfuse</a> <a class="src" href="https://cloudchipr.com/pricing" target="_blank" rel="noopener">Cloudchipr</a> <a class="src" href="https://aws.amazon.com/marketplace/pp/prodview-iz5xngcas4dtc" target="_blank" rel="noopener">AWS Marketplace</a></figcaption>
+  </figure>
+
+  <div class="split">
+    <div>
+      <h4>Taken. Do not build.</h4>
+      <ul>
+        <li>Cloud cost dashboards for startups</li>
+        <li>Chat and anomaly explanation over cloud bills</li>
+        <li>Commitment and rate optimization</li>
+        <li>SaaS discovery and renewal calendars</li>
+        <li>AI spend by model, key or team</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Open. Build here.</h4>
+      <ul>
+        <li>One model across cloud, AI, SaaS and people cost for a small company</li>
+        <li>Margin by customer, product and feature without heavy instrumentation</li>
+        <li>A monthly close for technology spend: budget versus actual, causes, forecast</li>
+        <li>Output written for a founder or finance lead</li>
+        <li>Benchmarks for companies under $50M revenue, which no source publishes</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="explore">
+    <p class="label">Explore next</p>
+    <ul>
+      <li><span class="own biz">BIZ</span><span>Request demos of Yarken and Numos. Record what their agents do without a human.</span></li>
+      
+      <li><span class="own eng">ENG</span><span>Sign up for Vantage's free tier, Ramp's AI spend tool and the AWS FinOps Agent preview. Time the onboarding and list what each cannot answer.</span></li>
+      <li><span class="own both">BOTH</span><span>Keep a one-page watchlist and review it monthly. AI token tracking went from new product to free bundle in about three months.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="customer">
+  <h2><span class="n">05</span>Customer</h2>
+  <div class="direction">
+    <p class="label">Direction</p>
+    <p>Begin with AI-native software companies, seed to Series B, spending $10K or more a month on cloud and AI. Next come Series B and C companies with a first finance leader. Qualify every prospect by spend.</p>
+  </div>
+
+  <div class="scroll">
+    <table class="w820">
+      <thead><tr><th>Segment</th><th>Technology spend</th><th>Who owns it</th><th>Pain</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr class="us"><td>AI-native startups <span class="sub">Seed to Series B</span></td><td>Inference is the main variable cost, in bad cases 30 to 40% of revenue or more</td><td>Founder or CTO, then head of engineering</td><td>Frequent, tied to margin and runway</td><td><strong>Start here</strong></td></tr>
+        <tr><td>Scale-ups with a first finance leader <span class="sub">Series B and C</span></td><td>Cloud at 5 to 10% of revenue or more, plus growing AI and SaaS lines</td><td>Moving from engineering to finance</td><td>Monthly: forecast misses and margin questions</td><td>Second</td></tr>
+        <tr><td>Fractional CFO and accounting firms</td><td>Many startup clients each</td><td>The firm's partner</td><td>Unproven</td><td>Channel to test</td></tr>
+        <tr><td>Mid-market <span class="sub">Below Apptio's price floor</span></td><td>All pools material</td><td>IT finance, FinOps, CFO's office</td><td>High, and a services budget exists</td><td>Hedge (Track B)</td></tr>
+        <tr><td>Generic seed startups and small businesses</td><td>Mostly SaaS and payroll; cloud often on credits</td><td>Founder or office manager</td><td>Low and occasional</td><td>Free funnel only</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Jobs customers would hire us for, ranked</h3>
+  <ol>
+    <li><strong>Cost to serve and gross margin</strong> by customer, feature and workflow, joined to revenue.</li>
+    <li><strong>Explain and bound spend changes.</strong> Why the bill moved, who or what caused it, and a guardrail for next time.</li>
+    <li><strong>A monthly close for technology spend.</strong> Budget versus actual with causes, a forecast, the split between cost of goods and operating expense, and a board-ready summary.</li>
+    <li>SaaS sprawl and renewals. Already served cheaply by card platforms.</li>
+    <li>Team chargeback and run-versus-grow. No demand found below the mid-market.</li>
+  </ol>
+  <p>The MVP does jobs 1 and 2 for the first segment, on a data model that later serves job 3 for the second.</p>
+
+  <h3>Where the money starts <span class="chip read">Our read</span></h3>
+  <div class="scroll">
+    <table class="w680">
+      <thead><tr><th>Monthly cloud and AI spend</th><th>What happens</th></tr></thead>
+      <tbody>
+        <tr><td class="num">Below $5K to $10K</td><td>Free tools are enough. Nobody pays.</td></tr>
+        <tr><td class="num">$10K to $25K</td><td>The pain is real, with a price ceiling of a few hundred dollars a month.</td></tr>
+        <tr><td class="num">Above $25K, or above 5 to 10% of revenue</td><td>A margin story that can carry annual contracts in the four to five figures.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="split">
+    <div>
+      <h4>Buying triggers</h4>
+      <ul>
+        <li>AI spend passes 5 to 10% of revenue</li>
+        <li>A recent jump in the cloud or AI bill</li>
+        <li>First finance leader or fractional CFO arrives</li>
+        <li>A move to usage-based or outcome-based pricing</li>
+        <li>Cloud credits within six months of expiry</li>
+        <li>A fundraise or diligence under way</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Evidence</h4>
+      <ul>
+        <li>92% of AI builders find AI cost hard to predict. <a class="src" href="https://www.saastr.com/the-builders-economy-10-metrics-from-iconiqs-newest-2026-state-of-ai-report" target="_blank" rel="noopener">ICONIQ via SaaStr</a></li>
+        <li>In a vendor-commissioned survey of 100 CFOs at firms up to 1,000 employees, 92% have no FinOps function and 44% name forecast accuracy their top cloud priority. <a class="src" href="https://cfotech.news/story/cfos-tighten-grip-on-soaring-cloud-ai-spend-risks" target="_blank" rel="noopener">CFOtech</a></li>
+        <li>Ramp's AI spend product allocates by team, user, project and key. Its page does not mention customers. <a class="src" href="https://ramp.com/ai-cost-monitoring" target="_blank" rel="noopener">Ramp</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <p><strong>Language matters.</strong> Say "AI and cloud gross margin" and "explain my bill". This buyer does not use the words TBM, cost allocation model or chargeback.</p>
+
+  <div class="note">
+    <p class="label">Track B, a hedge worth one week of interviews</p>
+    <p>Companies with a few million dollars of IT spend cannot justify Apptio's $80K floor plus an analyst, and the business founder can reach them. A budget for this work already exists there, which makes selling the work easier. The cost is a longer sales cycle and a heavier product. We test it during discovery and decide at Gate 1.</p>
+  </div>
+
+  <div class="explore">
+    <p class="label">Explore next</p>
+    <ul>
+      <li><span class="own both">BOTH</span><span>Hold 30 to 40 interviews by 18 December: 15 AI-native founders or CTOs, 8 finance leads at Series B and C, 6 fractional CFOs, 6 mid-market IT finance contacts.</span></li>
+      <li><span class="own biz">BIZ</span><span>Write an interview script built on past behavior: the last bill review, the last surprise, what they already pay for.</span></li>
+      <li><span class="own eng">ENG</span><span>Recruit at least half of the AI-native interviews cold. The business founder's network leans enterprise, and conversion by strangers is the signal investors read.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="product">
+  <h2><span class="n">06</span>Product and MVP</h2>
+  <div class="direction">
+    <p class="label">Direction</p>
+    <p>Build the analyst. The MVP gives an AI-native company three things: a margin table by customer, a plain account of what changed, and answers that show their sources. The business founder reviews every output for the first partners.</p>
+  </div>
+
+  <h3>The product idea: allocate with drivers</h3>
+  <p>Provider bills do not say which customer caused a cost. Engineering-led tools solve this by instrumenting every request, which takes months. TBM practitioners solve it with allocation drivers: usage signals a company already has, such as requests, seats, events or tokens per API key, that split a shared cost in a defensible way.</p>
+  <p>The agent proposes the drivers, states how confident it is, and tightens the model as better data arrives. A founder gets margin by customer this week, at a stated precision. This is where the business founder's allocation experience becomes product. <span class="chip test">To test</span></p>
+
+  <div class="outputs">
+    <div><h4>The Brief</h4><p>Weekly and at month end. Total technology spend by pool, what changed and why, and three actions ranked by dollars. Sent to Slack and email.</p></div>
+    <div><h4>The margin table</h4><p>Revenue, allocated cost and gross margin by customer, plan and product. Each line names its driver and carries a confidence note.</p></div>
+    <div><h4>Ask</h4><p>Questions in plain language. Every number comes from a stored query and links to the rows behind it.</p></div>
+  </div>
+
+  <h3>Scope</h3>
+  <div class="scroll">
+    <table class="w820">
+      <thead><tr><th>In the MVP</th><th>Next, months 3 to 6</th><th>Not now</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:400">AWS, OpenAI and Anthropic bills<br>Stripe revenue<br>One bank or card feed<br>CSV upload<br>Rules-first classification with a review queue<br>Allocation rules, first version<br>Variance explanation<br>Spike alerts with a cause</td>
+          <td>Google Cloud<br>QuickBooks and Ramp<br>SaaS vendor and renewal view<br>People cost from the ledger<br>Budget and forecast<br>Month-end close pack</td>
+          <td>Dashboards for engineers<br>Commitment purchasing<br>License reclamation<br>Vendor negotiation<br>Chargeback workflows<br>Write access to customer systems</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>The concierge loop</h3>
+  <ol>
+    <li>The customer grants read-only access.</li>
+    <li>The agent ingests, classifies and drafts the report.</li>
+    <li>The business founder corrects the draft and adds judgment.</li>
+    <li>Each correction becomes a rule, a test case or a prompt change.</li>
+  </ol>
+  <p>The first ten reports are slow on purpose. They produce the labeled data and the evaluation set.</p>
+
+  <figure>
+    <p class="ftitle">From wedge to Apptio replacement</p>
+    <p class="fsub">Each stage reuses the same cost model and adds the pools, controls and buyers of the next.</p>
+    <div class="stairs">
+      <div class="stair">
+        <span class="when">Months 0 to 6</span>
+        <h4>Wedge</h4>
+        <p>AI-native startups. Margin by customer and bill explanations.</p>
+        <p class="k">Move on when five paying customers read the Brief every week.</p>
+      </div>
+      <div class="stair">
+        <span class="when">Months 6 to 18</span>
+        <h4>Close</h4>
+        <p>Finance leads at Series B and C. All four pools, budget versus actual, forecast, ledger tie-out.</p>
+        <p class="k">Move on when finance signs without engineering pushing.</p>
+      </div>
+      <div class="stair">
+        <span class="when">Months 18 to 36</span>
+        <h4>Model</h4>
+        <p>Mid-market below Apptio's floor. Multi-entity allocation, showback, our own benchmarks, optional TBM mapping.</p>
+        <p class="k">Move on when a customer picks us over an Apptio quote.</p>
+      </div>
+      <div class="stair">
+        <span class="when">Year 3 onward</span>
+        <h4>Replace</h4>
+        <p>Apptio's installed base. Migration tooling, enterprise controls, a partner channel.</p>
+        <p class="k">The original goal.</p>
+      </div>
+    </div>
+  </figure>
+
+  <div class="split">
+    <div>
+      <h4>What makes it hard to copy</h4>
+      <ul>
+        <li>A library of allocation drivers and classification rules that improves with every customer</li>
+        <li>Business context held over time: rules, contracts, renewals, decisions</li>
+        <li>Numbers that reconcile to invoices, with an audit trail</li>
+        <li>The first spend and margin benchmarks for companies under $50M in revenue</li>
+      </ul>
+    </div>
+    <div>
+      <h4>How we will know the MVP works</h4>
+      <ul>
+        <li>First report within 48 hours of access</li>
+        <li>Totals within 1% of provider invoices</li>
+        <li>Each partner makes one decision a month from the output</li>
+        <li>A founder or finance lead opens the Brief every week</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="explore">
+    <p class="label">Explore next</p>
+    <ul>
+      <li><span class="own biz">BIZ</span><span>Draft the driver library: for each shared cost type, the candidate drivers and when each is defensible.</span></li>
+      <li><span class="own eng">ENG</span><span>Build the margin table by hand on one friendly company's real data before writing any interface.</span></li>
+      <li><span class="own both">BOTH</span><span>Decide what confidence means on an allocated number and how to show it.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="tech">
+  <h2><span class="n">07</span>Technical architecture</h2>
+  <div class="direction">
+    <p class="label">Direction</p>
+    <p>Own the data. Ingest bills into a FOCUS-shaped store, define metrics in code, and let the agent produce numbers only through tools. Use MCP at the edges.</p>
+  </div>
+
+  <h3>Five rules</h3>
+  <ol>
+    <li><strong>The model never does arithmetic.</strong> Every figure is the result of a tool call with a stored query.</li>
+    <li><strong>Metrics first, free SQL second.</strong> A small vendor-run benchmark in April 2026 put a semantic layer at 98 to 100% on in-scope questions, against 84 to 90% for text-to-SQL, and it fails loudly instead of silently. <a class="src" href="https://docs.getdbt.com/blog/semantic-layer-vs-text-to-sql-2026" target="_blank" rel="noopener">dbt</a></li>
+    <li><strong>Rules are data.</strong> Classification and allocation rules are versioned records that the agent proposes and a person approves.</li>
+    <li><strong>Reconcile or flag.</strong> Totals match the provider invoice, or the report says they do not.</li>
+    <li><strong>Read-only until trust is earned.</strong> Actions start as recommendations with evidence.</li>
+  </ol>
+
+  <figure>
+    <p class="ftitle">Reference architecture</p>
+    <p class="fsub">Data flows from top to bottom. The cost model in the middle is the part competitors lack and the part the business founder authors.</p>
+    <div class="stack">
+      <div class="layer"><b>Sources</b><span>AWS FOCUS export · OpenAI and Anthropic usage APIs · Stripe · Mercury, later Ramp and QuickBooks · CSV upload</span></div>
+      <div class="layer"><b>Landing zone</b><span>Original files kept unchanged, one storage prefix per customer</span></div>
+      <div class="layer"><b>Normalized store</b><span>FOCUS-shaped cost table with extra columns for model and tokens · vendors · ledger lines · people cost · contracts</span></div>
+      <div class="layer core"><b>Cost model</b><span>Classification rules · allocation rules and drivers · metric definitions. All versioned.</span></div>
+      <div class="layer"><b>Agent tools</b><span><code>query_metric</code> · <code>run_sql</code> (labeled exploratory) · <code>compute</code> · <code>get_rows</code> · <code>propose_rule</code></span></div>
+      <div class="layer"><b>Outputs</b><span>Brief · margin table · Ask · Slack alerts · later, our own MCP server</span></div>
+    </div>
+  </figure>
+
+  <h3>Connectors</h3>
+  <div class="scroll">
+    <table class="w820">
+      <thead><tr><th>Source</th><th>Gives us</th><th>Access and catches</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td>AWS</td><td>Cost, usage, credits, commitments</td><td>Read-only role with an external ID and a FOCUS 1.2 export. Use Cost Explorer only to load history: it charges the customer $0.01 a request. <a class="src" href="https://aws.amazon.com/aws-cost-management/aws-data-exports/faqs" target="_blank" rel="noopener">AWS</a></td><td class="num">Weeks 1–2</td></tr>
+        <tr><td>OpenAI, Anthropic</td><td>Cost and tokens by project or workspace, key and model</td><td>Needs an admin-class key, the most sensitive ask in onboarding. No customer or feature tags in billing data. <a class="src" href="https://platform.claude.com/docs/en/manage-claude/usage-cost-api" target="_blank" rel="noopener">Anthropic</a></td><td class="num">Weeks 3–4</td></tr>
+        <tr><td>Stripe</td><td>Revenue by customer and plan</td><td>Read-only key. Our addition to the research list, since margin needs revenue.</td><td class="num">Weeks 3–4</td></tr>
+        <tr><td>Mercury</td><td>Bank and card transactions for SaaS and vendors</td><td>Read-only token, no partner approval. <a class="src" href="https://docs.mercury.com/reference/getting-started-with-your-api" target="_blank" rel="noopener">Mercury</a></td><td class="num">Weeks 3–4</td></tr>
+        <tr><td>CSV or spreadsheet</td><td>Usage drivers, ledger exports, payroll summaries</td><td>Upload with assisted column mapping. Removes every approval dependency.</td><td class="num">Weeks 3–4</td></tr>
+        <tr><td>Google Cloud, Vercel, GitHub, Datadog</td><td>More usage-billed spend</td><td>Google's billing export has almost no history backfill.</td><td class="num">Weeks 5–10</td></tr>
+        <tr><td>QuickBooks, Ramp</td><td>Ledger and richer card data</td><td>Ramp needs partner approval, so apply in week 1. Intuit meters API reads.</td><td class="num">Weeks 9–10</td></tr>
+        <tr><td>Azure, Xero, NetSuite, payroll APIs, unified APIs</td><td></td><td>Azure's FOCUS export is still in preview. Unified APIs cost $65 a connection a month or more. <a class="src" href="https://www.merge.dev/pricing" target="_blank" rel="noopener">Merge</a></td><td class="num">Deferred</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>What code does and what the model does</h3>
+  <div class="scroll">
+    <table class="w680">
+      <thead><tr><th>Task</th><th>Approach</th></tr></thead>
+      <tbody>
+        <tr><td>Classify cloud line items</td><td>A rules table that the business founder authors once. No model call.</td></tr>
+        <tr><td>Classify new vendors</td><td>A small model, limited to our categories, with a confirmation queue. Vendor-run benchmarks put first-pass ledger categorization at roughly 66 to 87%, so design for fast correction.</td></tr>
+        <tr><td>Allocate shared cost</td><td>A deterministic engine that preserves totals. The model proposes rules and explains them.</td></tr>
+        <tr><td>Explain a variance</td><td>Code computes the breakdown: price, volume, mix, new vendors, credits. The model writes it up with links to rows.</td></tr>
+        <tr><td>Detect anomalies and forecast</td><td>Statistics. The model triages and explains.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="split">
+    <div>
+      <h4>Stack for one engineer</h4>
+      <ul>
+        <li>Postgres for tenants, rules, connector state and logs</li>
+        <li>Per-customer Parquet files queried with DuckDB, so agent SQL can only see one customer's data</li>
+        <li>Python connectors with a shared contract</li>
+        <li>Our own agent loop on a provider SDK, with prompt caching and model routing by task</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Costs to watch <span class="chip read">Estimates</span></h4>
+      <ul>
+        <li>Infrastructure for the first 50 customers: $100 to $500 a month</li>
+        <li>Model cost: about $0.09 to $0.18 per multi-step question, so cap questions on low tiers</li>
+        <li>Each connector is a permanent maintenance cost. Hold the MVP to five.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Security from day one</h3>
+  <ul>
+    <li>AWS access through an assumed role with an external ID. No long-lived keys. <a class="src" href="https://securitylabs.datadoghq.com/articles/securely-integrating-with-customers-aws-accounts/" target="_blank" rel="noopener">Datadog guidance</a></li>
+    <li>Customer secrets in a managed vault, never in prompts or logs.</li>
+    <li>Aggregate before the model sees data. People cost only at team level.</li>
+    <li>Treat ingested text such as tags, memos and vendor names as data that may carry instructions.</li>
+    <li>A public security page before the first partner. SOC 2 Type 1 around month six, when a mid-size prospect asks. <a class="src" href="https://www.vanta.com/collection/soc-2/soc-2-audit-timeline" target="_blank" rel="noopener">Vanta</a></li>
+    <li>If we promise zero retention at the model provider, check which API features and model tiers that rules out.</li>
+  </ul>
+
+  <h3>Traps the research found</h3>
+  <ul>
+    <li><strong>Credits hide cost.</strong> Startups on credits see near-zero bills. Show billed cost and pre-credit cost side by side.</li>
+    <li><strong>Org-wide AWS data needs the payer account.</strong> A reseller-owned organization yields only member-account data.</li>
+    <li><strong>Billing data is restated.</strong> Reprocess whole billing periods instead of appending.</li>
+    <li><strong>API terms change.</strong> Intuit and Xero both began charging developers in 2025 to 2026.</li>
+  </ul>
+
+  <div class="explore">
+    <p class="label">Explore next</p>
+    <ul>
+      <li><span class="own eng">ENG</span><span>Two-week spike: AWS export plus OpenAI and Anthropic into the store, a reconciliation check, and one hand-run margin table.</span></li>
+      <li><span class="own eng">ENG</span><span>Write 50 questions with known answers before any prompt work. Every wrong answer a customer reports becomes a test.</span></li>
+      <li><span class="own eng">ENG</span><span>Apply to the Ramp and Brex partner programs in week 1. Approval can take weeks.</span></li>
+      <li><span class="own both">BOTH</span><span>Decide our data-retention promise and the model routing that supports it.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="gtm">
+  <h2><span class="n">08</span>Go-to-market</h2>
+  <div class="direction">
+    <p class="label">Direction</p>
+    <p>Founder-led selling to a small design-partner cohort, opened by a free read-only spend and margin report. No paid marketing, marketplaces or search-ranking race in the first six months.</p>
+  </div>
+
+  <p class="statement">For AI-native software companies whose cloud and AI bills move their gross margin, Baymax is the technology finance analyst you do not have to hire. It connects read-only to your bills and revenue, tells you margin by customer and why costs moved, and keeps the model current every month.</p>
+
+  <h3>Channels, in order</h3>
+  <div class="scroll">
+    <table class="w820">
+      <thead><tr><th>Channel</th><th>Why</th><th>Evidence</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td>Founder networks and cold outreach to companies showing a trigger</td><td>Every comparable won its first customers this way</td><td>Strong</td><td class="num">Now</td></tr>
+        <tr><td>Free spend and margin report</td><td>Free audits on the market cover only cloud commitments. Ours covers cloud, AI and SaaS together.</td><td>Medium</td><td class="num">Week 3</td></tr>
+        <tr><td>Fractional CFO and accounting firms</td><td>One sale reaches many startups. They own cost classification and the board pack.</td><td>Thin</td><td class="num">Test now</td></tr>
+        <tr><td>One free data asset</td><td>Vantage's free instance-price site became a durable source of demand. Candidates: an AI model price history, or margin benchmarks for startups. <a class="src" href="https://www.vantage.sh/blog/vantage-has-acquired-ec2instances-info" target="_blank" rel="noopener">Vantage</a></td><td>Medium</td><td class="num">Month 3</td></tr>
+        <tr><td>Accelerator network</td><td>Pump won more than 50 customers from its accelerator batch <a class="src" href="https://sacra.com/research/pump-at-25m-revenue-growing-257-yoy/" target="_blank" rel="noopener">Sacra</a></td><td>Medium</td><td class="num">If we apply</td></tr>
+        <tr><td>Founder writing on LinkedIn</td><td>The business founder on technology cost for small companies. Engineering on making agents trustworthy with numbers.</td><td>Unmeasured</td><td class="num">Week 4</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Later:</strong> cloud marketplaces (a buying convenience that brings no demand), the Ramp, Rippling and QuickBooks app marketplaces, managed service providers, private equity operations teams.</p>
+  <p><strong>Skip for now:</strong> comparison-page search content, which funded vendors have saturated, and the TBM Council and FinOps Foundation as primary channels. Eighty percent of State of FinOps respondents work at companies above 1,000 employees, and the Council is underwritten by Apptio. <a class="src" href="https://tbmcouncil.org/engage/partners" target="_blank" rel="noopener">TBM Council</a></p>
+
+  <div class="split">
+    <div>
+      <h4>Design-partner program</h4>
+      <ul>
+        <li>Five to eight companies from the real target profile, at least half recruited cold</li>
+        <li>Six to eight weeks with a fixed end date</li>
+        <li>Read-only access. The business founder delivers by hand while engineering automates.</li>
+        <li>A price named up front: a pilot fee, or a signed commitment to convert at a stated monthly price</li>
+        <li>One yes-or-no decision at the end</li>
+      </ul>
+      <p>One startup in Bessemer's portfolio recruited all 12 of its design partners cold, and all 12 converted. <a class="src" href="https://www.bvp.com/atlas/design-partners-the-pre-launch-edge-most-ai-founders-ignore" target="_blank" rel="noopener">Bessemer</a></p>
+    </div>
+    <div>
+      <h4>Interview questions</h4>
+      <ul>
+        <li>Walk me through the last time you reviewed your AWS, OpenAI or SaaS bills. Who did it, and what changed?</li>
+        <li>When did a bill last surprise you? What happened next?</li>
+        <li>What have you already tried or paid for?</li>
+        <li>Who would approve $1,000 a month for this?</li>
+      </ul>
+      <p>Past behavior and existing spend are evidence. Compliments are not.</p>
+    </div>
+  </div>
+
+  <div class="explore">
+    <p class="label">Explore next</p>
+    <ul>
+      <li><span class="own biz">BIZ</span><span>Build a target list of 100 companies with a trigger noted for each.</span></li>
+      <li><span class="own biz">BIZ</span><span>Write a one-page offer for the free report and the design-partner terms.</span></li>
+      <li><span class="own eng">ENG</span><span>Publish a landing page with a sample Brief built from synthetic data.</span></li>
+      <li><span class="own both">BOTH</span><span>Choose the free data asset.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="pricing">
+  <h2><span class="n">09</span>Pricing</h2>
+  <div class="direction">
+    <p class="label">Direction</p>
+    <p>Flat monthly tiers by total technology spend under management, plus a free one-time report. Price the analyst's work. Avoid per-seat pricing and a share of savings.</p>
+  </div>
+
+  <h3>What the market has taught buyers to expect</h3>
+  <ul>
+    <li>Vantage: free to $2,500 a month of tracked spend, then $30 and $200 a month.</li>
+    <li>Cloudchipr: $49, $189 and $890 a month by spend band.</li>
+    <li>Ramp's AI spend tool, the AWS and Google agents, and Pump: free to the customer.</li>
+    <li>Cloudability from $30,000 a year. Apptio from $80,040.</li>
+  </ul>
+  <p>Visibility is worth about 1% of tracked spend. Anything above that has to be justified by work delivered or margin recovered.</p>
+
+  <h3>A ladder to test <span class="chip test">To test</span></h3>
+  <div class="scroll">
+    <table class="w680">
+      <thead><tr><th>Tier</th><th>Technology spend managed</th><th>Price</th><th>What they get</th></tr></thead>
+      <tbody>
+        <tr><td>Report</td><td>Any</td><td class="num">Free, once</td><td>A read-only spend and margin report within 48 hours</td></tr>
+        <tr><td>Team</td><td class="num">Up to $25K a month</td><td class="num">$300 a month</td><td>Weekly Brief, margin table, a capped number of questions</td></tr>
+        <tr><td>Growth</td><td class="num">Up to $100K a month</td><td class="num">$1,000 a month</td><td>Month-end close pack, forecast, alerts, more sources</td></tr>
+        <tr><td>Scale</td><td class="num">Above $100K a month</td><td class="num">From $2,500 a month</td><td>Multiple entities, ledger tie-out, analyst review</td></tr>
+        <tr><td>Design partner</td><td class="num">$10K to $150K a month</td><td class="num">$500 to $1,500 a month</td><td>Hand-delivered reports and a direct line to the founders</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Customers needed for $1M of annual revenue</h4>
+  <div class="figs">
+    <div><b>278</b><span>at $300 a month</span></div>
+    <div><b>84</b><span>at $1,000 a month</span></div>
+    <div><b>34</b><span>at $2,500 a month</span></div>
+  </div>
+  <p>The arithmetic is why the target is companies above $25K a month of spend.</p>
+
+  <div class="split">
+    <div>
+      <h4>Models to avoid</h4>
+      <ul>
+        <li><strong>Per seat.</strong> No vendor in the category prices this way, and we want everyone reading.</li>
+        <li><strong>Share of savings.</strong> It invites arguments over attribution, and rivals sell against it.</li>
+        <li><strong>Percent of spend.</strong> It punishes growth, and competitors use it as an attack line.</li>
+      </ul>
+      <p>For agent products, investor guidance favors a platform fee plus a usage or outcome component. <a class="src" href="https://www.bvp.com/atlas/the-ai-pricing-and-monetization-playbook" target="_blank" rel="noopener">Bessemer</a></p>
+    </div>
+    <div>
+      <h4>Our own unit economics</h4>
+      <ul>
+        <li>Model cost per customer per month. Meter questions on the low tier.</li>
+        <li>Founder hours per report, tracked from the first partner. If the hours do not fall, we are a consultancy.</li>
+        <li>API fees from Intuit and Xero as we scale.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="explore">
+    <p class="label">Explore next</p>
+    <ul>
+      <li><span class="own biz">BIZ</span><span>Name a price in every interview and watch the reaction. Raise it until people hesitate.</span></li>
+      <li><span class="own both">BOTH</span><span>Set the free-tier boundary after Gate 1.</span></li>
+      <li><span class="own eng">ENG</span><span>Track our own cost per customer from day one. We should be our own first user.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="company">
+  <h2><span class="n">10</span>Company setup and legal</h2>
+  <div class="direction">
+    <p class="label">Direction</p>
+    <p>Finish the paperwork in the first three weeks, in the order below. This section is orientation and not legal advice.</p>
+  </div>
+
+  <ol>
+    
+    <li><strong>Incorporate.</strong> A Delaware C-corporation. Stripe Atlas forms one for $500 in about a day. <a class="src" href="https://stripe.com/atlas" target="_blank" rel="noopener">Stripe Atlas</a></li>
+    <li><strong>Founder terms.</strong> Equity split, four-year vesting with a one-year cliff, full-time dates, who is CEO, and what happens if one founder cannot go full-time. Write it down.</li>
+    <li><strong>83(b) elections</strong> within 30 days of the stock purchase. The deadline cannot be fixed later.</li>
+    <li><strong>IP assignment</strong> from both founders to the company, in writing.</li>
+    <li><strong>Bank account</strong> and a standard SAFE template for any early money.</li>
+  </ol>
+
+  <div class="explore">
+    <p class="label">Explore next</p>
+    <ul>
+      
+      <li><span class="own both">BOTH</span><span>Sign a one-page founder agreement before incorporating.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="funding">
+  <h2><span class="n">11</span>Fundraising</h2>
+  <div class="direction">
+    <p class="label">Direction</p>
+    <p>Spend the first 12 weeks on our own money and raise on evidence. At Gate 2, choose between a pre-seed round, an accelerator, or staying bootstrapped.</p>
+  </div>
+
+  <ul>
+    <li>Pre-seed money is almost all SAFEs: 93% of rounds in the second quarter of 2026, with an average instrument of $276K. <a class="src" href="https://carta.com/data/state-of-pre-seed-q2-2026/" target="_blank" rel="noopener">Carta</a></li>
+    <li>Agent startups in this category raised $3M to $5.4M at pre-seed or seed in 2025 to 2026, usually with a product or a prior exit.</li>
+    <li>Y Combinator's standard deal is $125K for 7%, plus $375K on an uncapped SAFE. <a class="src" href="https://www.ycombinator.com/deal" target="_blank" rel="noopener">YC</a></li>
+    <li>Vantage and Vendr both had paying customers before they raised.</li>
+    <li>Sequoia, a16z and Bessemer all encourage AI startups to sell finished work and accept lower early margins. <a class="src" href="https://sequoiacap.com/article/services-the-new-software" target="_blank" rel="noopener">Sequoia</a> <a class="src" href="https://a16z.com/services-led-growth/" target="_blank" rel="noopener">a16z</a></li>
+  </ul>
+
+  <div class="scroll">
+    <table class="w680">
+      <thead><tr><th>Option at Gate 2</th><th>Fits if</th><th>Cost</th></tr></thead>
+      <tbody>
+        <tr><td>Stay bootstrapped</td><td>Partners pay enough to cover costs and the founders can go without salary</td><td>Slower, while six funded rivals move</td></tr>
+        <tr><td>Pre-seed SAFE <span class="sub">Roughly $500K to $1.5M, our estimate</span></td><td>Three or more paying partners and a clear wedge</td><td>Dilution and weeks spent raising</td></tr>
+        <tr><td>Accelerator</td><td>We want the network for first customers and guidance as first-time founders</td><td>7% for $125K and a fixed calendar</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>What investors will press on</h3>
+  <ul>
+    <li>Why will Ramp, Vantage or AWS not do this?</li>
+    <li>Why you two? An Apptio practitioner paired with an agent engineer is rare, and it is the answer.</li>
+    <li>Who pays today, and did strangers convert?</li>
+    <li>How does founder labor per customer fall over time?</li>
+  </ul>
+  <p>Cash costs in this phase are small: formation and legal fees, a few hundred dollars a month of infrastructure, and model spend. The real cost is founder time and income.</p>
+
+  <div class="explore">
+    <p class="label">Explore next</p>
+    <ul>
+      
+      <li><span class="own biz">BIZ</span><span>List 30 pre-seed investors and angels with FinOps, financial infrastructure or vertical AI in their portfolios.</span></li>
+      <li><span class="own both">BOTH</span><span>Check the next accelerator deadlines and decide by Gate 1 whether to apply.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="plan">
+  <h2><span class="n">12</span>First 90 days</h2>
+  <div class="direction">
+    <p class="label">Direction</p>
+    <p>Two gates. On 18 December we choose the wedge from interview evidence. On 12 February we have paying design partners or we change track.</p>
+  </div>
+
+  <figure>
+    <p class="ftitle">Thirteen weeks, 16 November 2026 to 12 February 2027</p>
+    <p class="fsub">Weeks 6 and 7 fall on the year-end holidays, so interviews must be booked before 18 December.</p>
+    <div class="scroll">
+      <div class="gantt">
+        <div class="grow ghead">
+          <div style="grid-column:2">1</div><div style="grid-column:3">2</div><div style="grid-column:4">3</div><div style="grid-column:5">4</div><div style="grid-column:6">5</div><div style="grid-column:7">6</div><div style="grid-column:8">7</div><div style="grid-column:9">8</div><div style="grid-column:10">9</div><div style="grid-column:11">10</div><div style="grid-column:12">11</div><div style="grid-column:13">12</div><div style="grid-column:14">13</div>
+          <div class="gdate" style="grid-column:2 / span 3">16 Nov</div><div class="gdate" style="grid-column:6 / span 3">14 Dec</div><div class="gdate" style="grid-column:10 / span 3">11 Jan</div><div class="gdate" style="grid-column:12 / span 3;text-align:right;padding-right:4px">ends 12 Feb</div>
+        </div>
+        <div class="grow"><div class="glabel">Company</div><div class="glines"></div>
+          <div class="gbar" style="grid-column:2 / span 3">Entity, founder terms</div>
+          <div class="gbar" style="grid-column:7 / span 3">Security page, SAFE</div>
+        </div>
+        <div class="grow"><div class="glabel">Customers</div><div class="glines"></div>
+          <div class="gbar hot" style="grid-column:2 / span 5">30 to 40 discovery interviews</div>
+          <div class="gbar hot" style="grid-column:7 / span 8">Design partners: recruit, deliver reports by hand, ask for payment</div>
+        </div>
+        <div class="grow"><div class="glabel">Product</div><div class="glines"></div>
+          <div class="gbar" style="grid-column:2 / span 4">Ingestion spike, first margin table</div>
+          <div class="gbar" style="grid-column:6 / span 9">MVP: metrics, agent tools, allocation rules, the Brief</div>
+        </div>
+        <div class="grow"><div class="glabel">Market</div><div class="glines"></div>
+          <div class="gbar" style="grid-column:3 / span 3">Target list, offer, landing page</div>
+          <div class="gbar" style="grid-column:8 / span 7">Founder writing, free data asset</div>
+        </div>
+        <div class="grow"><div class="glabel">Gates</div><div class="glines"></div>
+          <div class="gate" style="grid-column:5 / span 2">Gate 1 · 18 Dec</div>
+          <div class="gate" style="grid-column:12 / span 3">Gate 2 · 12 Feb</div>
+        </div>
+      </div>
+    </div>
+  </figure>
+
+  <div class="gates">
+    <div class="gatebox">
+      <span class="when">Gate 1 · 18 December 2026</span>
+      <h4>Keep the AI-native wedge if</h4>
+      <ul>
+        <li>At least 8 of 15 AI-native interviewees describe a bill surprise or an unanswered margin question in the last 90 days</li>
+        <li>At least 5 agree to read-only access for a report</li>
+        <li>At least 3 commit to a paid pilot at a named price</li>
+      </ul>
+      <p>Otherwise move to the segment whose interviews scored best: the finance-led close, or Track B.</p>
+    </div>
+    <div class="gatebox">
+      <span class="when">Gate 2 · 12 February 2027</span>
+      <h4>Continue and raise if</h4>
+      <ul>
+        <li>At least 3 design partners convert to paid, one of them recruited cold</li>
+        <li>First report arrives within 48 hours of access, with totals within 1% of invoices</li>
+        <li>Each partner can name a decision made from the output</li>
+        <li>Founder hours per report are falling</li>
+      </ul>
+      <p>These thresholds are proposals. Change them before the sprint starts, never after.</p>
+    </div>
+  </div>
+
+  <h3>The first two weeks</h3>
+  <div class="checks" id="checklist">
+    <div>
+      <h4><span class="own both">BOTH</span></h4>
+      
+      <label><input type="checkbox" id="c-terms"><span>Agree roles, time commitment and equity on one page</span></label>
+    </div>
+    <div>
+      <h4><span class="own biz">BIZ</span></h4>
+      <label><input type="checkbox" id="c-script"><span>Draft the interview script</span></label>
+      <label><input type="checkbox" id="c-list"><span>List 100 target companies</span></label>
+      <label><input type="checkbox" id="c-model"><span>Write our cost model on one page</span></label>
+      
+      <label><input type="checkbox" id="c-book"><span>Book the first 10 interviews</span></label>
+    </div>
+    <div>
+      <h4><span class="own eng">ENG</span></h4>
+      <label><input type="checkbox" id="c-spike"><span>Start the ingestion spike on our own or synthetic data</span></label>
+      <label><input type="checkbox" id="c-partner"><span>Apply to the Ramp and Brex partner programs</span></label>
+      <label><input type="checkbox" id="c-trials"><span>Try Vantage, Ramp AI spend and the AWS agent; record what each cannot answer</span></label>
+      <label><input type="checkbox" id="c-cold"><span>Send the first 20 cold interview requests</span></label>
+    </div>
+  </div>
+
+  <h3>Operating rhythm</h3>
+  <ul>
+    <li>A weekly founder meeting of 45 minutes: interviews done, partners signed, reports shipped, decisions needed.</li>
+    <li>A decision log with one line per decision: date, choice, reason.</li>
+    <li>A shared interview tracker, with notes written the same day.</li>
+    <li>Monthly: review the competitor watchlist and our own spend.</li>
+  </ul>
+</section>
+
+<section id="risks">
+  <h2><span class="n">13</span>Risks</h2>
+  <div class="direction">
+    <p class="label">Direction</p>
+    <p>The business model is the largest risk, ahead of the technology. The first twelve weeks are built to test willingness to pay before much is built.</p>
+  </div>
+  <div class="scroll">
+    <table class="w820">
+      <thead><tr><th>Risk</th><th>Why it is real</th><th>What we do</th><th>Early warning</th></tr></thead>
+      <tbody>
+        <tr><td>Small companies will not pay enough</td><td>Visibility sells for about 1% of spend, and free tiers keep growing</td><td>Qualify by spend, price the work, test price in every interview</td><td>Fewer than 3 paid pilots at Gate 1</td></tr>
+        <tr><td>Ramp or Rippling bundles it</td><td>Ramp made AI token tracking free within months. Rippling owns the people data.</td><td>Stay on the model across pools and customer-level margin. Integrate with them.</td><td>Ramp adds cloud bill ingestion or allocation by customer</td></tr>
+        <tr><td>Free agents from cloud providers</td><td>AWS aims its agent at small teams with no FinOps staff</td><td>Never be single-cloud or answers-only</td><td>Partners say the AWS agent is enough</td></tr>
+        <tr><td>Do-it-yourself with a coding agent</td><td>MCP servers make a one-off audit easy</td><td>Hold state: monthly close, rules, history, reconciliation</td><td>Prospects say they will run it themselves</td></tr>
+        <tr><td>Margin by customer needs data customers lack</td><td>Provider bills carry no customer tag</td><td>Driver-based allocation from data they have. Gateway connectors where present.</td><td>Partners cannot supply any usage driver</td></tr>
+        <tr><td>One wrong number destroys trust</td><td>Free-form SQL from a model fails silently</td><td>Metrics layer, tool-computed math, reconciliation, test suite, the business founder's review</td><td>An unreconciled total reaches a customer</td></tr>
+        
+        <tr><td>Sliding into consulting</td><td>Concierge delivery is labor</td><td>Track hours per report. Automate the most repeated step each week.</td><td>Hours flat after five reports</td></tr>
+        <tr><td>Churn</td><td>Startups fail, fix the problem once, or outgrow us</td><td>Make the monthly close a habit. Grow with them into the next stage.</td><td>Partners stop opening the Brief</td></tr>
+        <tr><td>A crowded pitch</td><td>Six funded agent startups, and Vantage and Ramp use the same words</td><td>Lead with margin, finance outcomes and the practitioner's method</td><td>Investors say they have seen this deck</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="streams">
+  <h2><span class="n">14</span>Directions to explore in depth</h2>
+  <div class="direction">
+    <p class="label">Direction</p>
+    <p>Eleven workstreams, each with an owner, one question and a first step. Pick any of them for a deep dive next.</p>
+  </div>
+  <div class="scroll">
+    <table class="streams w820">
+      <thead><tr><th>Workstream</th><th>Owner</th><th>The question</th><th>First step</th><th>Section</th></tr></thead>
+      <tbody>
+        <tr><td>Customer discovery</td><td><span class="own both">BOTH</span></td><td>Which segment has a problem urgent enough to pay for?</td><td>30 to 40 interviews by 18 December</td><td><a href="#customer">05</a></td></tr>
+        <tr><td>Competitive teardowns</td><td><span class="own biz">BIZ</span></td><td>What can Yarken, Numos, Ramp and Vantage not do?</td><td>Hands-on trials and demos</td><td><a href="#competition">04</a></td></tr>
+        <tr><td>Cost model and allocation method</td><td><span class="own biz">BIZ</span></td><td>What is our own taxonomy and driver library?</td><td>One-page model, first driver library</td><td><a href="#field">02</a>, <a href="#product">06</a></td></tr>
+        <tr><td>MVP specification</td><td><span class="own both">BOTH</span></td><td>What is the smallest report a partner would pay for?</td><td>Build one by hand on real data</td><td><a href="#product">06</a></td></tr>
+        <tr><td>Data and connectors</td><td><span class="own eng">ENG</span></td><td>Which five sources cover the first segment?</td><td>Two-week ingestion spike</td><td><a href="#tech">07</a></td></tr>
+        <tr><td>Agent reliability</td><td><span class="own eng">ENG</span></td><td>How do we prove every number?</td><td>Test questions and reconciliation checks</td><td><a href="#tech">07</a></td></tr>
+        <tr><td>Security and compliance</td><td><span class="own eng">ENG</span></td><td>What will a partner's CTO ask before granting access?</td><td>Access design and a security page</td><td><a href="#tech">07</a></td></tr>
+        <tr><td>Pricing</td><td><span class="own biz">BIZ</span></td><td>What will a company spending $25K a month pay?</td><td>Name a price in every interview</td><td><a href="#pricing">09</a></td></tr>
+        <tr><td>Go-to-market and content</td><td><span class="own biz">BIZ</span></td><td>Which channel produces the first 10 customers?</td><td>Target list and free-report offer</td><td><a href="#gtm">08</a></td></tr>
+        
+        <tr><td>Fundraising</td><td><span class="own both">BOTH</span></td><td>Raise, accelerator or bootstrap?</td><td>Runway numbers and an investor list</td><td><a href="#funding">11</a></td></tr>
+        <tr><td>Path upmarket</td><td><span class="own biz">BIZ</span></td><td>When and how do we reach Apptio's customers?</td><td>Track B interviews, stage 3 requirements</td><td><a href="#customer">05</a>, <a href="#product">06</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="sources">
+  <h2><span class="n">15</span>Sources and limits</h2>
+
+  <h3>What this research could not do</h3>
+  <ul>
+    <li>Reddit was unreachable, so community sentiment is under-sampled.</li>
+    <li>Several review and data sites blocked access, including G2, Gartner Peer Insights, Vendr and Carta. Figures from them come from search snippets and are flagged in the notes.</li>
+    <li>Many surveys are vendor-commissioned. Competitor pricing beyond published tiers is unverified.</li>
+    <li>The search budget ran out part-way through. Each note file ends its sections with the gaps that remain.</li>
+    <li>Spend thresholds, adoption thresholds and the pricing ladder are our own inference or hypothesis.</li>
+    <li>Nothing here is legal advice.</li>
+  </ul>
+
+  <h3>Research notes</h3>
+  <p>Seven working note files sit behind this plan, one per topic. They hold the full findings and every source link, and are kept by the founders outside this repository.</p>
+  <ul>
+    <li>01 The TBM field and its market</li>
+    <li>02 Apptio and enterprise TBM rivals</li>
+    <li>03 FinOps and agent competitors</li>
+    <li>04 SaaS and spend management tools</li>
+    <li>05 Customer pain in small companies</li>
+    <li>06 Go-to-market, pricing and fundraising</li>
+    <li>07 Technical feasibility</li>
+  </ul>
+
+  <h3>Key sources</h3>
+  <div class="sources">
+    <h4>Incumbent and field</h4>
+    <ul>
+      <li><a href="https://aws.amazon.com/marketplace/pp/prodview-mdyxbluvzbcn4" target="_blank" rel="noopener">AWS Marketplace: IBM Apptio Costing</a></li>
+      <li><a href="https://aws.amazon.com/marketplace/pp/prodview-iz5xngcas4dtc" target="_blank" rel="noopener">AWS Marketplace: IBM Apptio Standard</a></li>
+      <li><a href="https://www.apptio.com/?p=183973" target="_blank" rel="noopener">Apptio: November 2026 AI release</a></li>
+      <li><a href="https://www.apptio.com/resources/professional-services/" target="_blank" rel="noopener">Apptio professional services</a></li>
+      <li><a href="https://community.ibm.com/community/user/discussion/monthly-close-in-apptio" target="_blank" rel="noopener">IBM community: monthly close in Apptio</a></li>
+      <li><a href="https://www.tbmcouncil.org/taxonomy" target="_blank" rel="noopener">TBM Council: taxonomy</a></li>
+      
+      <li><a href="https://tbmcouncil.org/engage/partners" target="_blank" rel="noopener">TBM Council: partners</a></li>
+      <li><a href="https://www.finops.org/insights/2026-finops-framework/" target="_blank" rel="noopener">FinOps Foundation: 2026 framework</a></li>
+      <li><a href="https://data.finops.org/" target="_blank" rel="noopener">State of FinOps 2026</a></li>
+      <li><a href="https://focus.finops.org/focus-specification/" target="_blank" rel="noopener">FOCUS specification</a></li>
+      <li><a href="https://www.forrester.com/blogs/announcing-the-forrester-wave-it-financial-management-software-q2-2026-turn-insight-into-decisive-action/" target="_blank" rel="noopener">Forrester: ITFM Wave, Q2 2026</a></li>
+      <li><a href="https://watech.wa.gov/sites/default/files/2023-11/technology-business-management-action-plan.pdf" target="_blank" rel="noopener">Washington State TBM action plan</a></li>
+    </ul>
+    <h4>Market data</h4>
+    <ul>
+      <li><a href="https://www.iconiq.com/growth/insights/state-of-ai-2026" target="_blank" rel="noopener">ICONIQ: State of AI 2026</a></li>
+      <li><a href="https://ramp.com/data/ai-index" target="_blank" rel="noopener">Ramp AI Index</a></li>
+      <li><a href="https://mercury.com/blog/startup-economics-report-2026" target="_blank" rel="noopener">Mercury: startup economics report 2026</a></li>
+      <li><a href="https://www.saas-capital.com/blog-posts/spending-benchmarks-for-private-b2b-saas-companies" target="_blank" rel="noopener">SaaS Capital: spending benchmarks</a></li>
+      <li><a href="https://www.flexera.com/about-us/press-center/flexera-finds-cloud-value-is-rising-while-ai-waste-grows" target="_blank" rel="noopener">Flexera: 2026 State of the Cloud</a></li>
+      <li><a href="https://www.bvp.com/atlas/the-state-of-ai-2025" target="_blank" rel="noopener">Bessemer: State of AI 2025</a></li>
+      <li><a href="https://cfotech.news/story/cfos-tighten-grip-on-soaring-cloud-ai-spend-risks" target="_blank" rel="noopener">CFOtech: Cloud Capital CFO survey</a></li>
+      <li><a href="https://www.tokeneconomics.com/state-of-tokenomics/" target="_blank" rel="noopener">State of Tokenomics</a></li>
+      <li><a href="https://www.bls.gov/bdm/us_age_naics_00_table7.txt" target="_blank" rel="noopener">BLS: establishment survival</a></li>
+    </ul>
+    <h4>Competitors</h4>
+    <ul>
+      <li><a href="https://vantage.sh/pricing" target="_blank" rel="noopener">Vantage pricing</a></li>
+      <li><a href="https://cloudchipr.com/pricing" target="_blank" rel="noopener">Cloudchipr pricing</a></li>
+      <li><a href="https://www.cloudzero.com/pricing/" target="_blank" rel="noopener">CloudZero pricing</a></li>
+      <li><a href="https://www.finout.io/hubfs/pricing.md" target="_blank" rel="noopener">Finout pricing</a></li>
+      <li><a href="https://www.pump.co/" target="_blank" rel="noopener">Pump</a></li>
+      <li><a href="https://siliconangle.com/2026/06/11/aws-launches-finops-agent-bring-ai-cost-governance-cloud-spend-finopsx/" target="_blank" rel="noopener">SiliconANGLE: AWS FinOps Agent</a></li>
+      <li><a href="https://ramp.com/ai-cost-monitoring" target="_blank" rel="noopener">Ramp: AI spend management</a></li>
+      <li><a href="https://otpp.com/en-ca/about-us/news-and-insights/2026/ramp-raises-series-f-at-44-billion-valuation/" target="_blank" rel="noopener">Ramp Series F</a></li>
+      <li><a href="https://itbrief.com.au/story/rippling-launches-ai-spend-console-to-track-ai-costs" target="_blank" rel="noopener">Rippling AI Spend Console</a></li>
+      <li><a href="https://www.cledara.com/pricing-plans" target="_blank" rel="noopener">Cledara pricing</a></li>
+      <li><a href="https://www.tropicapp.io/blog/productiv-shut-down" target="_blank" rel="noopener">Tropic on the Productiv shutdown</a></li>
+      <li><a href="https://www.yarken.com/" target="_blank" rel="noopener">Yarken</a></li>
+      <li><a href="https://www.heyfuturenexus.com/posts/funded-numos-raises-4-25m-to-make-ai-accountable-to-finance-teams" target="_blank" rel="noopener">Numos funding</a></li>
+      <li><a href="https://www.pointfive.co/press/pointfive-raises-60m-series-b" target="_blank" rel="noopener">PointFive Series B</a></li>
+    </ul>
+    <h4>Company building</h4>
+    <ul>
+      <li><a href="https://techcrunch.com/2019/10/23/vendr/" target="_blank" rel="noopener">TechCrunch: Vendr at $1M ARR</a></li>
+      <li><a href="https://sacra.com/research/pump-at-25m-revenue-growing-257-yoy/" target="_blank" rel="noopener">Sacra: Pump revenue estimate</a></li>
+      <li><a href="https://sequoiacap.com/article/services-the-new-software" target="_blank" rel="noopener">Sequoia: services as the new software</a></li>
+      <li><a href="https://a16z.com/services-led-growth/" target="_blank" rel="noopener">a16z: services-led growth</a></li>
+      <li><a href="https://www.bvp.com/atlas/the-ai-pricing-and-monetization-playbook" target="_blank" rel="noopener">Bessemer: AI pricing playbook</a></li>
+      <li><a href="https://www.bvp.com/atlas/design-partners-the-pre-launch-edge-most-ai-founders-ignore" target="_blank" rel="noopener">Bessemer: design partners</a></li>
+      <li><a href="https://www.ycombinator.com/deal" target="_blank" rel="noopener">Y Combinator: standard deal</a></li>
+      <li><a href="https://carta.com/data/state-of-pre-seed-q2-2026/" target="_blank" rel="noopener">Carta: State of Pre-Seed, Q2 2026</a></li>
+      <li><a href="https://stripe.com/atlas" target="_blank" rel="noopener">Stripe Atlas</a></li>
+      
+    </ul>
+    <h4>Technical</h4>
+    <ul>
+      <li><a href="https://aws.amazon.com/aws-cost-management/aws-data-exports/faqs" target="_blank" rel="noopener">AWS Data Exports</a></li>
+      <li><a href="https://aws.amazon.com/aws-cost-management/aws-cost-explorer/pricing/" target="_blank" rel="noopener">AWS Cost Explorer pricing</a></li>
+      <li><a href="https://platform.claude.com/docs/en/manage-claude/usage-cost-api" target="_blank" rel="noopener">Anthropic usage and cost API</a></li>
+      <li><a href="https://docs.mercury.com/reference/getting-started-with-your-api" target="_blank" rel="noopener">Mercury API</a></li>
+      <li><a href="https://docs.getdbt.com/blog/semantic-layer-vs-text-to-sql-2026" target="_blank" rel="noopener">dbt: semantic layer benchmark</a></li>
+      <li><a href="https://engineering.ramp.com/post/meet-ramp-research" target="_blank" rel="noopener">Ramp engineering: data agent lessons</a></li>
+      <li><a href="https://securitylabs.datadoghq.com/articles/securely-integrating-with-customers-aws-accounts/" target="_blank" rel="noopener">Datadog: integrating with customer AWS accounts</a></li>
+      <li><a href="https://www.vanta.com/collection/soc-2/soc-2-audit-timeline" target="_blank" rel="noopener">Vanta: SOC 2 timeline</a></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>Baymax founding plan, v0.1. Prepared 16 November 2026 from desk research. Prices and product claims were observed that week and will drift. Checklist ticks are saved in this browser only.</p>
+</footer>
+
+</main>
+</div>
+
+<script>
+(function () {
+  // Highlight the current section in the contents rail.
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var byId = {};
+  links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          links.forEach(function (a) { a.classList.remove('active'); });
+          var a = byId[e.target.id];
+          if (a) a.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-10% 0px -80% 0px' });
+    document.querySelectorAll('main section[id]').forEach(function (s) { obs.observe(s); });
+  }
+
+  // Remember checklist ticks in this browser.
+  var KEY = 'baymax-plan-checks-v1';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (err) { saved = {}; }
+  document.querySelectorAll('#checklist input[type="checkbox"]').forEach(function (box) {
+    if (saved[box.id]) box.checked = true;
+    box.addEventListener('change', function () {
+      saved[box.id] = box.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) { /* storage unavailable */ }
+    });
+  });
+})();
+</script>
+</body>
+</html>
